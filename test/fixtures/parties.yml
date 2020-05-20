@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  belongs_to: 
+  location: MyString
+  start_time: 2020-05-20 15:26:36
+  end_time: 2020-05-20 15:26:36
+  details: MyText
+
+two:
+  belongs_to: 
+  location: MyString
+  start_time: 2020-05-20 15:26:36
+  end_time: 2020-05-20 15:26:36
+  details: MyText

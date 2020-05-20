@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Parties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Belongs to</th>
+      <th>Location</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Details</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parties.each do |party| %>
+      <tr>
+        <td><%= party.belongs_to %></td>
+        <td><%= party.location %></td>
+        <td><%= party.start_time %></td>
+        <td><%= party.end_time %></td>
+        <td><%= party.details %></td>
+        <td><%= link_to 'Show', party %></td>
+        <td><%= link_to 'Edit', edit_party_path(party) %></td>
+        <td><%= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Party', new_party_path %>

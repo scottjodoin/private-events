@@ -10,9 +10,23 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+  <p id="notice" class="notice"><%= notice %></p>
+  <p id="alert" class="alert"><%= alert %></p>
+  <h1>Private Events</h1>
+    <nav>
+    <% if user_signed_in? %>
+      <span><%= link_to current_user.name, edit_user_registration_path %></span>
+      &nbsp
+      <span><%= link_to "Sign out", destroy_user_session_path, method: :delete %></span>
+    <% end %>
+    </nav>
     <%= yield %>
+    <script>
+    setTimeout(()=>{
+      document.getElementById("alert").style.display = "none"
+      document.getElementById("notice").style.display = "none"
+    }, 1500)
+      
+    </script>
   </body>
 </html>

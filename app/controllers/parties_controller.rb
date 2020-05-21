@@ -1,10 +1,13 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
 
   # GET /parties
   # GET /parties.json
   def index
-    @parties = Party.all
+    @parties = current_user.parties
+    @upcoming_parties = Party.upcoming_parties
+    @previous_parties = Party.past_parties
   end
 
   # GET /parties/1
@@ -19,13 +22,15 @@ class PartiesController < ApplicationController
 
   # GET /parties/1/edit
   def edit
+    @party = Party.find(params[:id])
+    redirect_to @party unless @party.user_id == current_user.id
   end
 
   # POST /parties
   # POST /parties.json
   def create
     @party = Party.new(party_params)
-
+    @party.user_id = current_user.id
     respond_to do |format|
       if @party.save
         format.html { redirect_to @party, notice: 'Party was successfully created.' }
@@ -69,6 +74,6 @@ class PartiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def party_params
-      params.require(:party).permit(:belongs_to, :location, :start_time, :end_time, :details)
+      params.require(:party).permit(:name, :location, :start_time, :end_time, :details, :guest_list)
     end
 end

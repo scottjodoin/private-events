@@ -6,13 +6,13 @@ class PartiesController < ApplicationController
   # GET /parties.json
   def index
     @parties = current_user.parties
-    @upcoming_parties = Party.upcoming_parties
-    @previous_parties = Party.past_parties
+    @upcoming_invites = current_user.parties_guest
   end
 
   # GET /parties/1
   # GET /parties/1.json
   def show
+    @party = Party.find(params[:id])
   end
 
   # GET /parties/new
